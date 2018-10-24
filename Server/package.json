@@ -1,0 +1,21 @@
+{
+  "name": "slack-broadcaster",
+  "version": "1.0.0",
+  "description": "Send a message to multiple Slack channels",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pietro Caselani",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "slack": "^11.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-config-airbnb-base": "^12.1.0"
+  }
+}
