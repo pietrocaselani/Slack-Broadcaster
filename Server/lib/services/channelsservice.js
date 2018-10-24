@@ -1,6 +1,5 @@
 const _get_channels = (slack) => {
   return slack.channels.list().then((response) => {
-    console.log(response.channels);
     return response.channels.filter((channel) => channel.is_archived === false);
   });
 }
@@ -18,7 +17,6 @@ const _parse_channels = (channels_promise) => {
 }
 
 const _broadcast = (slack, envelope) => {
-  console.log(envelope);
   const text = envelope.message;
 
   const promises = envelope.channel_ids.map((channel) => {
