@@ -35,15 +35,17 @@ curl -X POST \
   http://localhost:3000/broadcast \
   -H 'Content-Type: application/json' \
   -d '{
-    "message": "Hello everyone!",
-    "channel_ids": [
-        "channel_id_0",
-        "channel_id_1",
-        "channel_id_2"
+    "message": "Message goes here!",
+    "channel": "channel_id",
+    "other_channels": [
+        "channel_id0",
+        "channel_id1"
     ]
 }'
 ```
 
 POST JSON body style:
 
-`{"message": "text message here", "channels_ids": ["channel_1", "channel_2"]}`
+`{"message": "text message here", "channel": "channel_id", "other_channels": ["channel_1", "channel_2"]}`
+
+In this example, the message is posted to `channel_id` and only the link to the message is posted on `channel_1` and `channel_2`

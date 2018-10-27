@@ -18,12 +18,31 @@ const _parse_channels = (channels_promise) => {
 
 const _broadcast = (slack, envelope) => {
   const text = envelope.message;
+  const channel = envelope.channel;
+  const other_channels = envelope.other_channels;
 
-  const promises = envelope.channel_ids.map((channel) => {
-    return slack.chat.postMessage({channel, text})
+  return slack.chat.postMessage({channel, text})
+  .then(response => {
+    if (!response.ok) {
+      throw `Couldn't send message to channel ${channel}`;
+    }
+
+    const message_ts = response.ts;
+
+    return slack.chat.getPermalink({channel, message_ts});
+  }).then(permalink_response => {
+    if (!permalink_response.ok) {
+      throw `Couldn't get message link at channel ${channel}`;
+    }
+
+    const message_link = permalink_response.permalink
+
+    const promises = other_channels.map(channel => {
+      return slack.chat.postMessage({channel, text: message_link})
+    });
+
+    return Promise.all(promises);
   });
-
-  return Promise.all(promises)
 }
 
 const ChannelsService = {
