@@ -36,7 +36,12 @@ export default {
   },
   methods: {
     broadcast: function() {
-      this.status = `Enviando "${this.message}" para ${this.selected}`
+      api.broadcast(this.message, this.selected)
+      .then(response => { // eslint-disable-line no-unused-vars
+        this.status = "Mensagem enviada"
+      }).catch(error => {
+        this.status = `Error: ${error}`;
+      });
     }
   },
   created() {

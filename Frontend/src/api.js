@@ -15,5 +15,10 @@ const instance = axios.create({
 export default {
   get_public_channels() {
     return instance.get('public_channels')
+  },
+  broadcast(message, channels) {
+    const other_channels = channels.map(c => c.id);
+    const channel = other_channels.shift();
+    return instance.post('broadcast', {message, channel, other_channels});
   }
 }
